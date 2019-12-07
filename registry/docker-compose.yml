@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  registry:
+    image: registry:2.7.1
+    hostname: registry
+    container_name: registry
+    restart: always
+    networks:
+      - registry
+    volumes:
+      - /data/registry:/var/lib/registry
+    ports:
+      - 80:5000
+
+networks:
+  registry:
+    driver: bridge

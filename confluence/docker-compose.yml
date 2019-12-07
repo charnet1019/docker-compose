@@ -1,0 +1,50 @@
+---
+version: '3'
+
+services:
+  confluence:
+    image: atlassian/confluence-server:6.15.7-alpine
+    container_name: confluence
+    hostname: confluence
+    networks:
+      - confluence
+    volumes:
+      - /data/confluence:/var/atlassian/application-data/confluence
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+    ports:
+      - '80:8090'
+      - '8091:8091'
+    environment:
+      - 'CATALINA_OPTS= -Xms1g -Xmx1g'
+      - 'CONFLUENCE_PROXY_NAME='
+      - 'CONFLUENCE_PROXY_PORT='
+      - 'CONFLUENCE_PROXY_SCHEME='
+      - 'CONFLUENCE_DELAYED_START='
+    labels:
+      com.blacklabelops.description: "Atlassian Confluence"
+      com.blacklabelops.service: "confluence"
+
+  postgresql:
+    image: postgres:12
+    container_name: postgres
+    hostname: postgres
+    networks:
+      - confluence
+    volumes:
+      - /data/postgresql:/var/lib/postgresql/data
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+    environment:
+      - 'POSTGRES_USER=confluence'
+      # CHANGE THE PASSWORD!
+      - 'POSTGRES_PASSWORD=E1xuiEL52R1'
+      - 'POSTGRES_DB=confluence'
+      - 'POSTGRES_ENCODING=UTF8'
+      - 'POSTGRES_COLLATE=C'
+      - 'POSTGRES_COLLATE_TYPE=C'
+    labels:
+      com.blacklabelops.description: "PostgreSQL Database Server"
+      com.blacklabelops.service: "postgresql"
+
+networks:
+  confluence:
+    driver: bridge
