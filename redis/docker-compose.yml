@@ -11,7 +11,8 @@ services:
     restart: always
     volumes:
       - /data/reids/data:/data:rw
-      - /data/config/redis.conf:/usr/local/etc/redis/redis.conf
+      #- /data/config/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
     logging:
       driver: json-file
