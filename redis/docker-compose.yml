@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:5.0.7
+    networks:
+      - redis
+    ports:
+      - 6379:6379/tcp
+    restart: always
+    volumes:
+      - /data/reids/data:/data:rw
+      - /data/redis/config:/usr/local/etc/redis/redis.conf
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 100m
+
+networks:
+  redis:
+    external: true
