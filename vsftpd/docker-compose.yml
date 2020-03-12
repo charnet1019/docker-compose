@@ -1,0 +1,37 @@
+---
+version: '3.7'
+
+services:
+  vsftpd:
+    hostname: vsftpd
+    container_name: vsftpd
+    #image: vsftpd:2.0.0
+    image: 10.10.40.16/vsftpd:1.0.1
+    restart: always
+    networks:
+      - vsftpd
+    ports:
+      - '20-21:20-21'
+      - '21100-21110:21100-21110'
+    volumes:
+      - /data/vsftpd/storage:/home/vsftpd
+      - ./logs:/var/log/vsftpd
+    environment:
+      FTP_USER: admin
+      FTP_PASS: secret
+      PASV_ADDRESS_ENABLE: 'YES'
+      REVERSE_LOOKUP_ENABLE: 'NO'
+      PASV_ADDRESS: '10.10.40.234'
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+
+networks:
+  vsftpd:
+    driver: bridge
+    external: true 
+
+
