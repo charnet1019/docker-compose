@@ -15,7 +15,7 @@ services:
       - '80:8090'
       - '8091:8091'
     environment:
-      - 'CATALINA_OPTS= -Xms1g -Xmx1g'
+      #- 'CATALINA_OPTS= -Xms1g -Xmx1g'
       - 'CONFLUENCE_PROXY_NAME='
       - 'CONFLUENCE_PROXY_PORT='
       - 'CONFLUENCE_PROXY_SCHEME='
