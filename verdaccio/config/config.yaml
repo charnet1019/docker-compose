@@ -1,0 +1,34 @@
+storage: /verdaccio/storage
+plugins: /verdaccio/plugins
+
+web:
+  title: Verdaccio
+
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+    #max_users: -1
+    
+uplinks:
+  npmjs:
+    url: https://registry.npm.taobao.org/
+
+packages:
+  '@*/*':
+    access: $all
+    publish: $authenticated
+    #unpublish: $authenticated
+    proxy: npmjs
+  '**':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+middlewares:
+  audit:
+    enabled: true
+
+logs:
+  - {type: stdout, format: pretty, level: http}
+
+

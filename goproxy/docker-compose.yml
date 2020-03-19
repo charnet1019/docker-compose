@@ -1,0 +1,27 @@
+---
+version: '3.7'
+
+services:
+  fileserver:
+    hostname: goproxy
+    container_name: goproxy
+    image: goproxy/goproxy
+    networks:
+      - goproxy
+    restart: always
+    command: -proxy https://goproxy.cn -exclude "goproxy.xxx.com"
+    volumes:
+      - /data/goproxy:/go:rw
+    ports:
+      - 80:8081
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+networks:
+  goproxy:
+    external: true
+
+

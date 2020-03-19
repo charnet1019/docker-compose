@@ -1,0 +1,29 @@
+---
+version: '3.7'
+
+services:
+  verdaccio:
+    hostname: verdaccio
+    container_name: verdaccio
+    image: verdaccio/verdaccio:4.5.1
+    networks:
+      - verdaccio
+    restart: always
+# chown 10001:65533 /data/npm/storage /data/npm/plugins
+    volumes:
+      - /data/npm/storage:/verdaccio/storage:rw
+      - /data/npm/plugins:/verdaccio/plugins:rw
+      - ./config/config.yaml:/verdaccio/conf/config.yaml
+    ports:
+      - 5873:4873
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+networks:
+  verdaccio:
+    external: true
+
+
