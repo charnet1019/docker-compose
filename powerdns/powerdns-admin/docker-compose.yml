@@ -1,0 +1,25 @@
+---
+version: '3.7'
+
+services:
+  powerdnsadmin:
+    hostname: powerdnsadmin
+    container_name: powerdnsadmin
+    image: ngoduykhanh/powerdns-admin:0.2.2
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - pdns
+    volumes:
+      - ./data:/data
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+networks:
+  pdns:
+    driver: bridge
+    external: true
