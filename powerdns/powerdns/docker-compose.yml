@@ -1,0 +1,49 @@
+---
+version: '3.7'
+
+services:
+  mysql:
+    hostname: mysql
+    container_name: mysql
+    image: mariadb:10.1
+    restart: always
+    networks:
+      - pdns
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 5xFm49eybwDgSGEe
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+  powerdns:
+    hostname: powerdns
+    container_name: powerdns
+    image: psitrax/powerdns:v4.3.0
+    restart: always
+    command: --cache-ttl=120 --webserver=yes --webserver-address=0.0.0.0 --webserver-password=x5xFm49eybwDgSGEe --webserver-port=8081 --webserver-allow-from=0.0.0.0/0 --api=yes --api-key=Qno964Vyfz1LC3kl
+    depends_on:
+      - mysql
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 8081:8081
+    networks:
+      - pdns
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASS: 5xFm49eybwDgSGEe
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+
+networks:
+  pdns:
+    driver: bridge
+    external: true
