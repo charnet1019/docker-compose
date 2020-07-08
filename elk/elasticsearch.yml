@@ -1,0 +1,17 @@
+cluster.name: "mycluster"
+network.host: 0.0.0.0
+
+xpack.security.enabled: true
+
+indices.memory.index_buffer_size: 20%
+indices.memory.min_index_buffer_size: 96mb
+
+# Search pool
+thread_pool.search.size: 5
+thread_pool.search.queue_size: 100
+
+# Bulk pool
+thread_pool.write.queue_size: 300
+
+# Index pool
+thread_pool.write.size: 2
