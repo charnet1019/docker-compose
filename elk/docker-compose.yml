@@ -1,0 +1,73 @@
+---
+version: '3.7'
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.5.1
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - node.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /data/es/esdata:/usr/share/elasticsearch/data
+      - /data/es/eslog:/usr/share/elasticsearch/logs
+      #- /var/lib/docker/esconfig/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+
+#  kibana:
+#    hostname: kibana
+#    container_name: kibana
+#    restart: always
+#    image: kibana:7.5.1
+    #ports:
+    #  - "80:5601"
+#    environment:
+#      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+#    volumes:
+#      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+#    networks:
+#      - elastic
+#    logging:
+#      driver: json-file
+#      options:
+#        max-file: '3'
+#        max-size: '10m'
+
+#  nginx:
+#    hostname: nginx
+#    container_name: nginx
+#    restart: always
+#    image: nginx:elk
+#    networks:
+#      - elastic
+#    ports:
+#      - 80:80
+#    logging:
+#      driver: json-file
+#      options:
+#        max-file: '3'
+#        max-size: '10m'
+
+
+
+networks:
+  elastic:
+    driver: bridge
+    external: true
