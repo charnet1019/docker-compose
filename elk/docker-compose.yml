@@ -20,6 +20,7 @@ services:
       - /data/es/eslog:/usr/share/elasticsearch/logs
       #- /var/lib/docker/esconfig/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      #- /data/es/plugins:/usr/share/elasticsearch/plugins    # 插件安装位置
     ports:
       - 9200:9200
     networks:
