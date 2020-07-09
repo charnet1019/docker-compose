@@ -1,0 +1,45 @@
+---
+version: '3.7'
+
+services:
+  zookeeper:
+    hostname: zookeeper
+    container_name: zookeeper
+    image: wurstmeister/zookeeper:3.4.6
+    restart: always
+    networks:
+      - cache
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+  kafka:
+    hostname: kafka1
+    container_name: kafka1
+    image: wurstmeister/kafka:2.12-2.4.0
+    restart: always
+    ports:
+      - 9092:9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/kafka:/kafka:rw
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_MESSAGE_MAX_BYTES: 10485760
+      KAFKA_LOG_RETENTION_HOURS: 72
+    networks:
+      - cache
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+
+networks:
+  cache:
+    driver: bridge
+    external: true
