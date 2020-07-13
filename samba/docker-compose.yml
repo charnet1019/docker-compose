@@ -1,0 +1,30 @@
+---
+version: '3.7'
+
+services:
+  samba:
+    hostname: samba
+    container_name: samba
+    image: elswork/samba:2.2.1
+    restart: always
+    networks:
+      - samba
+    volumes:
+      - /storage/mydata:/share/folder
+    ports:
+      - 137-138:137-138/udp
+      - 139:139
+      - 445:445
+      - 445:445/udp
+    command: -u "testuser:xpqFtohIbfeyvGL3wP" -s "FileShare:/share/folder:/rw:secuser"
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
+
+
+networks:
+  samba:
+    external: true
+    driver: bridge
