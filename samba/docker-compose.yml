@@ -16,7 +16,7 @@ services:
       - 139:139
       - 445:445
       - 445:445/udp
-    command: -u "testuser:xpqFtohIbfeyvGL3wP" -s "FileShare:/share/folder:/rw:secuser"
+    command: -u "testuser:xpqFtohIbfeyvGL3wP" -s "FileShare:/share/folder:/rw:testuser"
     logging:
       driver: json-file
       options:
