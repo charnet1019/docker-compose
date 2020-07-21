@@ -1,0 +1,29 @@
+---
+version: "3.7"
+
+services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: bitnami/redis:5.0.7
+    ports:
+      - 6379:6379/tcp
+    restart: always
+    environment:
+      REDIS_PASSWORD: EgYGGE6GqDgAJU8dSWkY
+    volumes:
+      - /data/redis/data:/bitnami/redis/data:rw
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+    networks:
+      - cache
+
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+
+networks:
+  cache:
+    driver: bridge
+    external: true
