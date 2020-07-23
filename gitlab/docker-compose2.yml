@@ -10,14 +10,17 @@ services:
 
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        #external_url 'http://gitlab.3day.top'
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
+        nginx['enable'] = true
+        # ####### for http
+        #external_url 'http://gitlab.3day.top'
         # ##### for https
         external_url 'https://gitlab.3day.top'
         nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.3day.top.pem"
         nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.3day.top.key"
         nginx['redirect_http_to_https'] = true
-        # email setting
+        nginx['redirect_http_to_https_port'] = 80
+        # ##### email setting
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_address'] = "smtp.qiye.aliyun.com"
         gitlab_rails['smtp_port'] = 465
