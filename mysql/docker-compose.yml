@@ -1,0 +1,28 @@
+---
+version: '3.7'
+
+services:
+  mysql:
+    hostname: mysql
+    container_name: mysql
+    restart: always
+    image: mysql:8.0.18
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password --max_connections=5000 --mysqlx_max_connections=3000 --expire_logs_days=5
+    environment:
+      MYSQL_DATABASE: mysql
+      MYSQL_ROOT_PASSWORD: XpWQ9Hu5S0543WmE
+      MYSQL_USER: normal
+      MYSQL_PASSWORD: 2GVv6apyzotUsI5y
+    volumes:
+      - /var/lib/mysql/db_tg:/var/lib/mysql
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - ./my.cnf:/etc/mysql/my.cnf
+    networks:
+      - mysql
+
+
+networks:
+  mysql:
+    external: true
