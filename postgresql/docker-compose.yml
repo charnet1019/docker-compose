@@ -1,0 +1,34 @@
+---
+version: '3.7'
+
+services:
+
+  db:
+    container_name: db
+    image: postgres:12.3-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: cds
+      POSTGRES_PASSWORD: uy7YGp4bqwljX5N
+      POSTGRES_DB: cds
+
+    volumes:
+      - /data/postgres/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - pg
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - pg
+
+
+networks:
+  pg:
+    external: true
