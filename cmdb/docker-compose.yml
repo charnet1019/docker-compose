@@ -17,6 +17,11 @@ services:
       cmdb:
         aliases:
           - mysql
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
 
   cmdb-cache:
     image: registry.cn-qingdao.aliyuncs.com/pycook/cmdb-cache:1.0
@@ -25,6 +30,11 @@ services:
       cmdb:
         aliases:
           - redis
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
 
   cmdb-search:
     image: registry.cn-qingdao.aliyuncs.com/pycook/cmdb-search:1.2
@@ -54,6 +64,11 @@ services:
       cmdb:
         aliases:
           - cmdb-search
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
 
   cmdb-api:
     image: registry.cn-qingdao.aliyuncs.com/pycook/cmdb-api:2.2
@@ -86,6 +101,11 @@ services:
       cmdb:
         aliases:
           - cmdb-api
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
 
   cmdb-ui:
     image: registry.cn-qingdao.aliyuncs.com/pycook/cmdb-ui:2.2
@@ -111,8 +131,14 @@ services:
       - cmdb
     ports:
       - "80:80"
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
+
 
 networks:
   cmdb:
     external: true
-    
+
