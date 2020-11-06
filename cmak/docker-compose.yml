@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  cmak:
+    container_name: cmak
+    image: iunera/cmak:3.0.0.5
+    networks:
+      - cmak
+    ports:
+      - 9000:9000
+    environment:
+      - ZK_HOSTS=10.106.52.83:2181,10.106.52.84:2181,10.106.52.85:2181
+      - KAFKA_MANAGER_AUTH_ENABLED=true
+      - KAFKA_MANAGER_USERANME=admin
+      - KAFKA_MANAGER_PASSWORD=admin
+    restart: always
+
+networks:
+  cmak:
+    external: true
