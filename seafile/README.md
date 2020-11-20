@@ -8,4 +8,4 @@ ONLYOFFICE_EDIT_FILE_EXTENSION = ('docx', 'pptx', 'xlsx','doc','xls','ppt')
 ```
 
 页面设置:
-![pdnsettings](https://github.com/charnet1019/docker-compose/blob/master/powerdns/imgs/pdnSettings.png)
+![pdnsettings](https://github.com/charnet1019/docker-compose/blob/master/seafile/img/settings.png)
