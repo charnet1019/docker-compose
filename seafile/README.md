@@ -6,3 +6,6 @@ ONLYOFFICE_APIJS_URL = 'http://10.106.52.43/web-apps/apps/api/documents/api.js'
 ONLYOFFICE_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'fodt', 'odp', 'fodp', 'ods', 'fods')
 ONLYOFFICE_EDIT_FILE_EXTENSION = ('docx', 'pptx', 'xlsx','doc','xls','ppt')
 ```
+
+页面设置:
+![pdnsettings](https://github.com/charnet1019/docker-compose/blob/master/powerdns/imgs/pdnSettings.png)
