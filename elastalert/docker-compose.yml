@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  elastalert:
+    container_name: elastalert
+    image: anjia0532/elastalert-docker:v0.2.4
+    hostname: elastalert
+    restart: always
+
+    environment:
+      ELASTICSEARCH_HOST: 10.106.52.93
+      ELASTICSEARCH_PORT: 19200
+      TZ: Asia/Shanghai
+      ELASTALERT_WECHAT_CORP_ID: 'ww7d758XDc0944e1ab5f'
+      ELASTALERT_WECHAT_SECRET: 'jgkCtiINTYId-MFotgAWK-Z9887cuSSrVApd8PJq7W0'
+      ELASTALERT_WECHAT_AGENT_ID: '1000241'
+      ELASTALERT_WECHAT_TAG_ID: '333'
+
+    volumes:
+      - ./data:/opt/elastalert/rules
+
+
+
