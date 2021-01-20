@@ -17,7 +17,7 @@ services:
       ELASTALERT_WECHAT_TAG_ID: '3333333'
 
     volumes:
-      - ./data:/opt/elastalert/rules
+      - ./conf:/opt/elastalert/rules
 
 
 
