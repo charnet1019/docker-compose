@@ -1,0 +1,40 @@
+---
+version: '3.7'
+
+services:
+  mysql:
+    hostname: mysql
+    container_name: mysql
+    restart: always
+    image: mysql:5.7.33
+    ports:
+      - 3306:3306
+    command: [
+      '--default-authentication-plugin=mysql_native_password',
+      '--max_connections=5000',
+      '--expire_logs_days=5',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--slow_query_log=on',
+      '--long_query_time=1',
+      '--slow_query_log_file=/var/lib/mysql/slow_query.log'
+    ]
+    environment:
+      MYSQL_DATABASE: hello 
+      MYSQL_ROOT_PASSWORD: XpWQ9Hu5S0543WmE
+      MYSQL_USER: normal
+      MYSQL_PASSWORD: 2GVv6apyzotUsI5y
+    volumes:
+      - /home/mysql/data:/var/lib/mysql
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      #- ./my.cnf:/etc/mysql/my.cnf
+    networks:
+      - mysql
+
+
+networks:
+  mysql:
+    external: true
+    
+    
+    
