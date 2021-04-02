@@ -10,11 +10,21 @@ services:
 
     environment:
       GITLAB_OMNIBUS_CONFIG: |
+        # ##### for http
         external_url 'http://gitlab.3day.top:8081'
+        # ####### for ssh
+        gitlab_rails['gitlab_shell_ssh_port'] = 8022
+        # ##### for https
+        #external_url 'https://gitlab.3day.top'
+        #nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.3day.top.pem"
+        #nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.3day.top.key"
+        #nginx['redirect_http_to_https'] = true
+        #nginx['redirect_http_to_https_port'] = 80
+        
+        nginx['enable'] = true
         nginx['listen_port'] = 80
         #registry['enable'] = true
         #registry_external_url 'http://gitlab.3day.top:8081'
-        gitlab_rails['gitlab_shell_ssh_port'] = 8022
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
         # email setting
         gitlab_rails['smtp_enable'] = true
