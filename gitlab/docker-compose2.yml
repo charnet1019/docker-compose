@@ -12,8 +12,11 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
         nginx['enable'] = true
+        nginx['listen_port'] = 80
         # ####### for http
         #external_url 'http://gitlab.3day.top'
+        # ####### for ssh
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
         # ##### for https
         external_url 'https://gitlab.3day.top'
         nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.3day.top.pem"
