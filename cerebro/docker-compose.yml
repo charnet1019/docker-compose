@@ -1,9 +1,12 @@
+---
 version: '3.7'
 
 services:
   cerebro:
+    hostname: cerebro
     container_name: cerebro
-    image: lmenezes/cerebro:0.9.2
+    image: lmenezes/cerebro:0.9.3
+    restart: always
     networks:
       - cerebro
     restart: always
