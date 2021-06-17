@@ -6,10 +6,14 @@ services:
     hostname: registry
     container_name: registry
     restart: always
+    environment:
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
     networks:
       - registry
     volumes:
       - /data/registry:/var/lib/registry
+      - ./certs:/certs
     ports:
       - 80:5000
 
