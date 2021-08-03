@@ -1,0 +1,34 @@
+---
+version: '3.7'
+
+services:
+  xxl-job-admin:
+    hostname: xxl-job-admin
+    container_name: xxl-job-admin
+    image: 172.18.10.13:10080/base/xxl-job-admin:2.3.0
+    restart: always
+    networks:
+      - xxljob
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - /data/logs/xxl-job-admin:/data/applogs
+      - ./application.properties:/application.properties
+    environment:
+      PARAMS: '--spring.config.location=/application.properties'
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
+
+
+networks:
+  xxljob:
+    #external: true
+    ipam:
+      config:
+        #- subnet: 172.20.0.0/16
+        - subnet: 172.18.0.0/24
+
