@@ -1,0 +1,34 @@
+---
+version: '3.7'
+
+services:
+  cadvisor:
+    hostname: cadvisor
+    container_name: cadvisor
+    restart: always
+    image: 172.18.10.13:10080/base/cadvisor:v0.38.8
+    networks:
+      - cadvisor
+    ports:
+      - 8888:8080
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+      - /cgroup:/cgroup:ro
+    devices:
+      - "/dev/kmsg:/dev/kmsg"
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: '10m'
+
+
+networks:
+  cadvisor:
+    external: true
+
