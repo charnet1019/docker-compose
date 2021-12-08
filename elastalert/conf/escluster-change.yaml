@@ -1,0 +1,56 @@
+name: prod-zqy-job-errlog
+type: change
+index: prod-zqy-job-*
+# 10分钟内发生2次错误则触发报警
+#num_events: 2
+timeframe:
+    minutes: 5
+
+compare_key: message
+ignore_null: true
+query_key: appname
+
+filter:
+- query:
+    query_string:
+      query: "loglevel:ERROR"
+      
+
+# 告警抑制
+# 5 分钟内相同的报警不会重复发送
+realert:
+  minutes: 10
+
+exponential_realert:
+# 指数级扩大 realert 时间，中间如果有报警，
+# 则按照 5 -> 10 -> 20 -> 40 -> 60 不断增大报警时间到制定的最大时间，
+# 如果之后报警减少，则会慢慢恢复原始 realert 时间
+exponential_realert:
+  hours: 1
+
+alert:
+#- "elastalert_modules.dingtalk_alert.DingTalkAlerter"
+- "elastalert_modules.wechat_qiye_alert.WeChatAlerter"
+
+match_enhancements:
+- "elastalert_enhancements.TimeEnhancement.TimeEnhancement"
+
+alert_subject: "生产环境中企云业务异常日志"
+alert_text_type: alert_text_only
+alert_text: |
+  从 {} 到 {} 产生了错误日志,如下:
+  模块: {}
+  内容: {}
+
+ # 堆栈: `{}`
+
+alert_text_args:
+  - local_starttime
+  - local_endtime
+  - appname
+  - message
+ # - stack_trace
+
+
+
+
