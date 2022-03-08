@@ -10,7 +10,7 @@ git config --global http.sslVerify false
 
 ### 生产环境建议使用外部redis 和 postgresql
 
-> redis
+> redis  
 > [设置外部redis](https://docs.gitlab.com/omnibus/settings/redis.html)
 ```
 # Disable the bundled Redis
@@ -27,7 +27,7 @@ gitlab_rails['redis_socket'] = '/tmp/redis.sock' # defaults to /var/opt/gitlab/r
 gitlab_rails['redis_password'] = '<redis_password>'
 ```
 
-> postgresql
+> postgresql  
 > [设置外部postgresql](https://docs.gitlab.com/ee/administration/postgresql/external.html)
 ```
 # Disable the bundled Omnibus provided PostgreSQL
