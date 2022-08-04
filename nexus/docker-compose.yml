@@ -17,3 +17,6 @@ services:
 networks:
   nexus:
     external: true
+    # ipam:
+    #   config:
+    #     - subnet: 172.21.0.0/24
