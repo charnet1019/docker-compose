@@ -14,6 +14,11 @@ services:
       - KAFKA_MANAGER_USERANME=admin
       - KAFKA_MANAGER_PASSWORD=admin
     restart: always
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
 networks:
   cmak:

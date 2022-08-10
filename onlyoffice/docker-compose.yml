@@ -31,6 +31,11 @@ services:
        - /data/onlyoffice/cache:/var/lib/onlyoffice/documentserver/App_Data/cache/files
        - /data/onlyoffice/public:/var/www/onlyoffice/documentserver-example/public/files
        - /data/onlyoffice/fonts:/usr/share/fonts
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
        
   onlyoffice-rabbitmq:
     container_name: onlyoffice-rabbitmq
@@ -38,6 +43,11 @@ services:
     restart: always
     expose:
       - '5672'
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
   onlyoffice-postgresql:
     container_name: onlyoffice-postgresql
@@ -51,4 +61,9 @@ services:
       - '5432'
     volumes:
       - /data/pgsql:/var/lib/postgresql
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
   

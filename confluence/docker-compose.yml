@@ -23,6 +23,11 @@ services:
     labels:
       com.blacklabelops.description: "Atlassian Confluence"
       com.blacklabelops.service: "confluence"
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
   postgresql:
     image: postgres:12
@@ -44,6 +49,11 @@ services:
     labels:
       com.blacklabelops.description: "PostgreSQL Database Server"
       com.blacklabelops.service: "postgresql"
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
 networks:
   confluence:

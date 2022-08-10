@@ -16,6 +16,11 @@ services:
       - ./certs:/certs
     ports:
       - 80:5000
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
 networks:
   registry:

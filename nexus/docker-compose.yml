@@ -13,6 +13,11 @@ services:
       - /data/nexus:/nexus-data
     networks:
       - nexus
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
 networks:
   nexus:

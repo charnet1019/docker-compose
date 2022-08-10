@@ -18,6 +18,11 @@ services:
 
     volumes:
       - ./conf/escluster-change.yaml:/opt/elastalert/rules/escluster-change.yaml
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
 
 
 
