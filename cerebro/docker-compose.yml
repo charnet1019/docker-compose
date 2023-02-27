@@ -5,13 +5,21 @@ services:
   cerebro:
     hostname: cerebro
     container_name: cerebro
-    image: lmenezes/cerebro:0.9.3
+    image: lmenezes/cerebro:0.9.4
     restart: always
     networks:
       - cerebro
     restart: always
     ports:
       - 9000:9000
+    environment:
+      # Basic auth using admin/admin user
+      - AUTH_TYPE=basic
+      - BASIC_AUTH_USER=admin
+      - BASIC_AUTH_PWD=htL8Ufj2/Ux+9.jN9QqZ
+    volumes:
+      - ./application.conf:/opt/cerebro/conf/application.conf
+      - ./db:/var/lib/cerebro
     logging:
       driver: json-file
       options:
