@@ -1,0 +1,22 @@
+---
+version: '3.7'
+
+services:
+  kuboard:
+    container_name: kuboard
+    #image: provectuslabs/kafka-ui:v0.7.1
+    image: eipwork/kuboard:v3.5.2.6
+    restart: unless-stopped
+    ports:
+      - 80:80/tcp
+      - 10081:10081/tcp
+    environment:
+      KUBOARD_ENDPOINT: http://10.0.0.59:80
+      KUBOARD_AGENT_SERVER_TCP_PORT: 10081
+    volumes:
+      - ./data:/data
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: '10m'
