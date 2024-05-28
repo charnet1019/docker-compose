@@ -1,0 +1,31 @@
+kafka:
+  clusters:
+  - bootstrapServers: 10.0.0.18:31090,10.0.0.19:31092,10.0.0.20:31093
+    name: kafka
+
+auth:
+  type: login_form
+spring:
+  jmx:
+    enabled: true
+  security:
+    user:
+      name: admin
+      password: xxxxxx
+
+logging:
+  level:
+    root: INFO
+    com.provectus: INFO
+    reactor.netty.http.server.AccessLog: INFO
+
+management:
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "info,health"
