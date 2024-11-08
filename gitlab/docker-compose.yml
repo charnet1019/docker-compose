@@ -46,6 +46,7 @@ services:
       - '/data/config:/etc/gitlab'
       - '/data/logs:/var/log/gitlab'
       - '/data/data:/var/opt/gitlab'
+      #- './ssl:/etc/gitlab/ssl'
       - '/etc/localtime:/etc/localtime:ro'
     networks:
       - gitlab
